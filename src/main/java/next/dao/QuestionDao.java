@@ -10,6 +10,12 @@ import core.jdbc.JdbcTemplate;
 import core.jdbc.RowMapper;
 
 public class QuestionDao {
+	
+	public void update(int questionId) {
+		JdbcTemplate jdbcTemplate = new JdbcTemplate();
+		String sql = "UPDATE QUESTIONS SET countOfComment=countOfComment+1 WHERE questionId = ?";
+		jdbcTemplate.update(sql, questionId);
+	}
 
 	public void insert(Question question) {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();

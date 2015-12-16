@@ -106,7 +106,6 @@
 		      </h2>
 		      <div class="metadata">
 		      	  <!--
-		      	  4.
 		      	  ${each.writer}는 author,   
 		      	  <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${each.createdDate}" />는 date,
 		      	  comments은 빈 값으로 inline tag을 사용하여 넣는다.
