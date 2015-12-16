@@ -1,5 +1,7 @@
 package next.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -9,18 +11,17 @@ import core.utils.ServletRequestUtils;
 import next.dao.QuestionDao;
 import next.model.Question;
 
-public class SaveQuestionController extends AbstractController {
+public class MoreQuestionController extends AbstractController {
 
 	@Override
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		QuestionDao questionDao = QuestionDao.getInstance();
-		
-		questionDao.insert(new Question(
-				ServletRequestUtils.getStringParameter(request, "writer"),
-				ServletRequestUtils.getStringParameter(request, "title"),
-				ServletRequestUtils.getStringParameter(request, "contents")));
+		List<Question> questions = questionDao
+				.findAllByPage(ServletRequestUtils.getRequiredIntParameter(request, "pageNumber"));
 
-		return jstlView("redirect:list.next");
+		ModelAndView mav = jsonView();
+		mav.addObject("questions", questions);
+
+		return mav;
 	}
-
 }

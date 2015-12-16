@@ -5,23 +5,23 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import next.dao.QuestionDao;
-import next.model.Question;
 import core.mvc.AbstractController;
 import core.mvc.ModelAndView;
+import next.dao.QuestionDao;
+import next.model.Question;
 
-public class ListController extends AbstractController {
+public class ApiListController extends AbstractController {
 	private QuestionDao questionDao;
-	
+
 	@Override
-	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		questionDao = QuestionDao.getInstance();
 		List<Question> questions = questionDao.findAllByPage(1);
-		
-		ModelAndView mav = jstlView("list.jsp");
+
+		ModelAndView mav = jsonView();
 		mav.addObject("questions", questions);
-		
+
 		return mav;
 	}
+
 }
